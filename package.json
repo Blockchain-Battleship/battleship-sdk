@@ -1,0 +1,32 @@
+{
+  "name": "battleship-connect",
+  "version": "1.0.0",
+  "description": "sdk for connecting blockchain game to the blockchain. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Blockchain-Battleship/battleship-sdk.git"
+  },
+  "keywords": [
+    "blockchain",
+    "battleship",
+    "sdk",
+    "connect",
+    "contracts",
+    "ethereum",
+    "wallet",
+    "blockchain-battleship",
+    "polygon",
+    "biconomy",
+    "cocos"
+  ],
+  "author": "Ebube Ud",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Blockchain-Battleship/battleship-sdk/issues"
+  },
+  "homepage": "https://github.com/Blockchain-Battleship/battleship-sdk#readme"
+}
