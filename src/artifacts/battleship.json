@@ -1,0 +1,628 @@
+  {
+    "address": "0xc05d072139a32D1dA803B91f42e2CB857Ec3a152",
+    "abi": [
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_dataStorageContract",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "_gameLogicAddress",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_battleId",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "_launchingPlayer",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "_opponent",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint8",
+            "name": "_position",
+            "type": "uint8"
+          }
+        ],
+        "name": "AttackLaunched",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_battleId",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "enum IDataStorageSchema.GameMode",
+            "name": "_gameMode",
+            "type": "uint8"
+          },
+          {
+            "indexed": false,
+            "internalType": "address[2]",
+            "name": "_players",
+            "type": "address[2]"
+          }
+        ],
+        "name": "BattleStarted",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_battleId",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "_confirmingPlayer",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "_opponent",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint8",
+            "name": "_position",
+            "type": "uint8"
+          },
+          {
+            "components": [
+              {
+                "internalType": "enum IDataStorageSchema.ShipType",
+                "name": "ship",
+                "type": "uint8"
+              },
+              {
+                "internalType": "enum IDataStorageSchema.AxisType",
+                "name": "axis",
+                "type": "uint8"
+              }
+            ],
+            "indexed": false,
+            "internalType": "struct IDataStorageSchema.ShipPosition",
+            "name": "_shipDetected",
+            "type": "tuple"
+          }
+        ],
+        "name": "ConfirmShotStatus",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_battleId",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "_winnerAddress",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "_opponentAddress",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_reward",
+            "type": "uint256"
+          }
+        ],
+        "name": "ConfirmWinner",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "address payable",
+            "name": "userAddress",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "address payable",
+            "name": "relayerAddress",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "bytes",
+            "name": "functionSignature",
+            "type": "bytes"
+          }
+        ],
+        "name": "MetaTransactionExecuted",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "_playerAddress",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "enum IDataStorageSchema.GameMode",
+            "name": "_gameMode",
+            "type": "uint8"
+          }
+        ],
+        "name": "PlayerJoinedLobby",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "_to",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_amount",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_balance",
+            "type": "uint256"
+          }
+        ],
+        "name": "Transfer",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_battleId",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "_winnerAddress",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "_opponentAddress",
+            "type": "address"
+          }
+        ],
+        "name": "WinnerDetected",
+        "type": "event"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "bytes",
+            "name": "proof",
+            "type": "bytes"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "root",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "hash",
+            "type": "bytes32"
+          }
+        ],
+        "name": "checkProof",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "pure",
+        "type": "function",
+        "constant": true
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "bytes",
+            "name": "proof",
+            "type": "bytes"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "root",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "string",
+            "name": "hash",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "index",
+            "type": "uint256"
+          }
+        ],
+        "name": "checkProofOrdered",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "pure",
+        "type": "function",
+        "constant": true
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "bytes[]",
+            "name": "proofs",
+            "type": "bytes[]"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "root",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "string",
+            "name": "leafs",
+            "type": "string"
+          }
+        ],
+        "name": "checkProofsOrdered",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "pure",
+        "type": "function",
+        "constant": true
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address payable",
+            "name": "userAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "bytes",
+            "name": "functionSignature",
+            "type": "bytes"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "sigR",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "sigS",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "uint8",
+            "name": "sigV",
+            "type": "uint8"
+          }
+        ],
+        "name": "executeMetaTransaction",
+        "outputs": [
+          {
+            "internalType": "bytes",
+            "name": "",
+            "type": "bytes"
+          }
+        ],
+        "stateMutability": "payable",
+        "type": "function",
+        "payable": true
+      },
+      {
+        "inputs": [],
+        "name": "getChainID",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "pure",
+        "type": "function",
+        "constant": true
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "user",
+            "type": "address"
+          }
+        ],
+        "name": "getNonce",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "nonce",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function",
+        "constant": true
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "begin",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "end",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "text",
+            "type": "string"
+          }
+        ],
+        "name": "getSlice",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "stateMutability": "pure",
+        "type": "function",
+        "constant": true
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "nonce",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "chainID",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bytes",
+            "name": "functionSignature",
+            "type": "bytes"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "sigR",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "sigS",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "uint8",
+            "name": "sigV",
+            "type": "uint8"
+          }
+        ],
+        "name": "verify",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function",
+        "constant": true
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "enum IDataStorageSchema.GameMode",
+            "name": "_gameMode",
+            "type": "uint8"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "_root",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "string",
+            "name": "_encryptedMerkleTree",
+            "type": "string"
+          }
+        ],
+        "name": "joinLobby",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "payable",
+        "type": "function",
+        "payable": true
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_battleId",
+            "type": "uint256"
+          }
+        ],
+        "name": "getPlayersEncryptedPositions",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function",
+        "constant": true
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_battleId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "_previousPositionLeaf",
+            "type": "string"
+          },
+          {
+            "internalType": "bytes",
+            "name": "_previousPositionProof",
+            "type": "bytes"
+          },
+          {
+            "internalType": "uint8",
+            "name": "_attackingPosition",
+            "type": "uint8"
+          }
+        ],
+        "name": "attack",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_battleId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "_player",
+            "type": "address"
+          }
+        ],
+        "name": "getPositionsAttacked",
+        "outputs": [
+          {
+            "internalType": "uint8[]",
+            "name": "",
+            "type": "uint8[]"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function",
+        "constant": true
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_battleId",
+            "type": "uint256"
+          }
+        ],
+        "name": "collectReward",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }
+    ]
+}
